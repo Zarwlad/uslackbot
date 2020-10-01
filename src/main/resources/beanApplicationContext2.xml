@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:property-placeholder location="application.properties"/>
+    <!-- Define your beans here -->
+    <bean id="fortuneService"
+          class="ru.zarwlad.uslackbot.model.coaches.FortuneServiceImplNew"
+          scope="prototype">
+    </bean>
+    <bean id = "xmlCoach"
+          class="ru.zarwlad.uslackbot.model.coaches.CricketCoach"
+          scope="singleton"
+          init-method="initCoach"
+          destroy-method="closeCoach">
+
+        <property name="fortuneService" ref="fortuneService"/>
+        <property name="team" value="${coach.team}"/>
+        <property name="emailAddress" value="${coach.email}"/>
+    </bean>
+</beans>
+
+
+
+
+
